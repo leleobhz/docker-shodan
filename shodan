@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if type podman >&2>/dev/null; then
+	podman run --privileged -it -v ~/.shodan:/root/.shodan pqatsi/shodan:latest "$@"
+elif type docker >&2>/dev/null; then
+	docker run --privileged -it -v ~/.shodan:/root/.shodan pqatsi/shodan:latest "$@"
+fi

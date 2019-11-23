@@ -1,10 +1,12 @@
-FROM debian:stretch
+FROM python:slim
 
-MAINTAINER Martin Venuš <martin.venus@neatous.cz>
+LABEL maintainer="desenvolvimento@zenithtecnologia.com.br"
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update && apt-get -y install python-pip python-dev
 RUN pip install shodan
+RUN mkdir /root/.shodan
 
-ENTRYPOINT ["/bin/bash"]
+COPY entrypoint.sh /usr/local/bin
+
+VOLUME ["/root/.shodan"]
+ENTRYPOINT ["entrypoint.sh"]
+CMD ["shodan"]
